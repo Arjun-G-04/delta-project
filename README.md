@@ -4,7 +4,7 @@ This is my Delta project for inductions 2023. This is a web app for everything r
 
 ## ClassNITTe
 
-Live developmental website on Google Cloud App Engine - [ClassNITTe](https://wise-diagram-392116.uc.r.appspot.com/)
+Live developmental website on Vercel - [ClassNITTe](https://delta-project.vercel.app)
 
 ### Completed Features
 - ~Student login using DAuth (without styling)~
