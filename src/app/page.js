@@ -4,11 +4,12 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 
 export default function Home() {
-  const baseURL = process.env.BASE_URL
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL
   const [loading, setLoading] = useState(true)
   const [auth, setAuth] = useState(false)
   const [userDetails, setUserDetails] = useState(null)
-  const loginURL = process.env.NODE_ENV === 'production' ? 'https://auth.delta.nitt.edu/authorize?client_id=aohOCpCGUUxlBn1C&redirect_uri='+encodeURIComponent(baseURL+"/callback")+'&response_type=code&grant_type=authorization_code&state=sdafsdghb&scope=email+openid+profile+user&nonce=bscsbascbadcsbasccabs' : 'https://auth.delta.nitt.edu/authorize?client_id=NAIRt7G6lbmLLFpN&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&response_type=code&grant_type=authorization_code&state=sdafsdghb&scope=email+openid+profile+user&nonce=bscsbascbadcsbasccabs'
+  const redirectURI = encodeURIComponent(baseURL+"/callback")
+  const loginURL = true ? 'https://auth.delta.nitt.edu/authorize?client_id=aohOCpCGUUxlBn1C&redirect_uri='+redirectURI+'&response_type=code&grant_type=authorization_code&state=sdafsdghb&scope=email+openid+profile+user&nonce=bscsbascbadcsbasccabs' : 'https://auth.delta.nitt.edu/authorize?client_id=NAIRt7G6lbmLLFpN&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&response_type=code&grant_type=authorization_code&state=sdafsdghb&scope=email+openid+profile+user&nonce=bscsbascbadcsbasccabs'
 
   useEffect(() => {
     getInitialData()
