@@ -14,7 +14,7 @@ const ubuntu = Ubuntu({
 })
 
 export const metadata = {
-  title: 'NITT Hostel',
+  title: 'Hostel NITT',
 }
 
 export default function RootLayout({ children }) {

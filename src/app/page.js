@@ -104,7 +104,7 @@ export default function Home() {
         </div>
       } else {
         return <div className="bg-background flex flex-col h-screen">
-          <div className="my-auto mx-6 md:mx-auto bg-secondary p-5 rounded-md h-[65vh] md:w-[70vmin] text-text">
+          <div className="my-auto mx-6 md:mx-auto bg-secondary p-5 rounded-md h-auto md:w-[70vmin] text-text">
           <h1 className="font-ubuntu text-2xl">Tell us about yourself</h1>
           <form onSubmit={submit} className="flex flex-col font-poppins mt-7">
             <label>Name</label>

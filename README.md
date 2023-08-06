@@ -1,6 +1,6 @@
 # Delta Project
 
-This is my Delta project for inductions 2023. This is a web app for finding new roomates during first year hostel allotment as well as for second year re-allotment.
+This is my project for Delta Inductions 2023. This is a web app for finding new roommates during first year hostel allotment as well as for second year re-allotment.
 
 ## NITT Hostel
 
@@ -20,7 +20,7 @@ Live developmental website on Vercel - [NITT Hostel](https://delta-project.verce
 Clone this repo into your local folder
 
 ### 2. Install the npm modules
-Open the terminal and install the npm modules using
+Open the terminal at the local folder and install the npm modules using
 ```
 npm install
 ```
