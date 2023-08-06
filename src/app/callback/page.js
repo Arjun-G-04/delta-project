@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import Loading from '../components/loading'
 
 export default function Callback() {
     const baseURL = process.env.NEXT_PUBLIC_BASE_URL
@@ -24,6 +25,6 @@ export default function Callback() {
     }, [])
 
     return <div>
-        Loading...
+        <Loading />
     </div>
 }

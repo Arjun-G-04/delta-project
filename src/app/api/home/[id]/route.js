@@ -1,10 +1,10 @@
 import connectMongoDB from "@/libs/mongodb"
 import Auth from "@/models/Auth"
+import Student from "@/models/Student"
 import { NextResponse } from "next/server"
 
 export async function GET(req, { params }) {
     const {id} = params
-    let output = {auth: false}
 
     try {
         await connectMongoDB()
@@ -20,13 +20,18 @@ export async function GET(req, { params }) {
         if (resJSON.error) {
             await Auth.findByIdAndDelete(id)
         } else {
-            output = {auth: true, details: resJSON}
+            const user = await Student.findOne({ rollno: resJSON.email.slice(0, 9)})
+
+            if (user === null) {
+                return NextResponse.json({auth: true, created: false, details: resJSON})
+            } else {
+                return NextResponse.json({auth: true, created: true, userDetails: user})
+            }
         }
     } catch(error) {
         console.log(error)
+        return NextResponse.json({auth: false})
     }
-
-    return NextResponse.json(output)
 }
 
 export async function DELETE(req, {params}) {

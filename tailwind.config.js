@@ -13,6 +13,11 @@ module.exports = {
         'primary': '#03b2b5',
         'secondary': '#361735',
         'accent': '#fb18f7',
+      },
+      fontFamily: {
+        sans: ['sans-serif'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+        ubuntu: ['var(--font-ubuntu)', 'sans-serif']
       }
     },
   },

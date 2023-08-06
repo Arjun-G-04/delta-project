@@ -2,6 +2,7 @@
 
 import { headers } from "next/dist/client/components/headers"
 import { useEffect, useState } from "react"
+import Loading from "../components/loading"
 
 export default function Login() {
     const baseURL = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_BASE_URL : "http://localhost:3000"
@@ -71,21 +72,30 @@ export default function Login() {
     }
 
     if (loading) {
-        return <h1>Loading</h1>
-    } else if (auth) {
         return <div>
+            <Loading />
+        </div>
+    } else if (auth) {
+        return <div className="bg-background text-text h-screen">
             <p>Welcome admin!</p>
             <button onClick={logout}>Logout</button>
         </div>
     } else {
-        return <div>
-            <h1>Teacher Login</h1>
-            <form onSubmit={submit} className="flex flex-col">
-                <input className="text-black" type="email" onChange={emailChange} value={email} required></input>
-                <input className="text-black" type="password" onChange={passwordChange} value={password} required></input>
-                {formLoading ? <p>Loading</p> : <button type="submit">Submit</button>}
-                {error ? "Wrong email or password" : ""}
-            </form>
+        return <div className="bg-background h-screen flex flex-col justify-center items-center">
+            <div className="hover:scale-105 hover:drop-shadow-[0px_0px_30px_rgba(54,23,53,0.5)] ease-in-out duration-500 mt-auto mb-auto flex flex-col gap-10 bg-secondary w-[70vmin] md:w-[50vmin] md:h-[50vmin] rounded-md p-10 items-center justify-center">
+                <h1 className="text-text text-5xl text-center font-ubuntu">Admin Login</h1>
+                <form onSubmit={submit} className="flex flex-col text-text font-poppins w-11/12 md:w-2/3">
+                    <label>Email ID</label>
+                    <input className="text-black pl-2 rounded-sm" placeholder="Email ID" type="email" onChange={emailChange} value={email} required></input>
+                    <label className="mt-3">Password</label>
+                    <input className="text-black pl-2 rounded-sm" placeholder="Password" type="password" onChange={passwordChange} value={password} required></input>
+                    {formLoading ? <div className="mx-auto mt-7 h-8 w-8 animate-spin border-primary border-4 border-t-transparent rounded-[100%]"></div> : <button className="hover:bg-transparent hover:text-primary border-primary border-2 mt-7 mx-auto px-5 py-2 rounded-md bg-primary text-black" type="submit">Submit</button>}
+                    {error ? <div className="mt-4 text-red-400 text-center">Wrong email or password</div> : ""}
+                </form>
+            </div>
+            <div>
+                <p className="text-text font-poppins mb-5">Made with ♥ by Arjun</p>
+            </div>
         </div>
     }
 }
