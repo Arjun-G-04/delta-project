@@ -10,9 +10,12 @@ Live developmental website on Vercel - [NITT Hostel](https://delta-project.verce
 - ~Student login using DAuth~
 - ~Admin login using Firebase~
 - ~Student registering basic bio when logging~
+- ~Admin can add hostel details (Hostel Name, Gender, No. of rooms, Room capacity, Year)~
 
 ### Planned Features
-- Admin can add hostel details
+- Student profile
+- Publish student profile
+- Profile filter
 
 ## Setup
 

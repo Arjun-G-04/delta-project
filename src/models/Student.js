@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose"
-import { stringify } from "postcss"
 
 const studentSchema = new Schema (
     {
@@ -24,6 +23,10 @@ const studentSchema = new Schema (
             required: true
         },
         year: {
+            type: String,
+            required: true
+        },
+        langs: {
             type: String,
             required: true
         }

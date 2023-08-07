@@ -13,6 +13,7 @@ export default function Home() {
   const [userDetails, setUserDetails] = useState(null)
   const [dept, setDept] = useState("")
   const [description, setDescription] = useState("")
+  const [langs, setLangs] = useState('')
   const [formLoading, setFormLoading] = useState(false)
   const redirectURI = encodeURIComponent(baseURL+"/callback")
   const loginURL = process.env.NODE_ENV === 'production' ? 'https://auth.delta.nitt.edu/authorize?client_id=aohOCpCGUUxlBn1C&redirect_uri='+redirectURI+'&response_type=code&grant_type=authorization_code&state=sdafsdghb&scope=email+openid+profile+user&nonce=bscsbascbadcsbasccabs' : 'https://auth.delta.nitt.edu/authorize?client_id=NAIRt7G6lbmLLFpN&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&response_type=code&grant_type=authorization_code&state=sdafsdghb&scope=email+openid+profile+user&nonce=bscsbascbadcsbasccabs'
@@ -75,7 +76,8 @@ export default function Home() {
         department: dept,
         description: description,
         gender: dauthDetails.gender,
-        year: dauthDetails.batch.split(" ")[1]
+        year: dauthDetails.batch.split(" ")[1],
+        langs: langs
       })
     })
       .then((res) => {
@@ -108,13 +110,15 @@ export default function Home() {
           <h1 className="font-ubuntu text-2xl">Tell us about yourself</h1>
           <form onSubmit={submit} className="flex flex-col font-poppins mt-7">
             <label>Name</label>
-            <input className="rounded-sm pl-2 text-black disabled:bg-slate-400 disabled:hover:cursor-not-allowed" type="text" value={dauthDetails.name} disabled></input>
+            <input className="h-8 rounded-sm pl-2 text-black disabled:bg-slate-400 disabled:hover:cursor-not-allowed" type="text" value={dauthDetails.name} disabled></input>
             <label className="mt-2">Roll No</label>
-            <input className="rounded-sm pl-2 text-black disabled:bg-slate-400 disabled:hover:cursor-not-allowed" value={dauthDetails.email.slice(0,9)} type="text" disabled></input>
+            <input className="h-8 rounded-sm pl-2 text-black disabled:bg-slate-400 disabled:hover:cursor-not-allowed" value={dauthDetails.email.slice(0,9)} type="text" disabled></input>
             <label className="mt-2">Gender</label>
-            <input className="rounded-sm pl-2 text-black disabled:bg-slate-400 disabled:hover:cursor-not-allowed" value={dauthDetails.gender} disabled></input>
+            <input className="h-8 rounded-sm pl-2 text-black disabled:bg-slate-400 disabled:hover:cursor-not-allowed" value={dauthDetails.gender} disabled></input>
+            <label className="mt-2">Languages</label>
+            <input className="h-8 rounded-sm pl-2 text-black" placeholder="English, Hindi, Tamil..." value={langs} onChange={(e) => {setLangs(e.target.value)}} required></input>
             <label className="mt-2">Department</label>
-            <select className="rounded-sm pl-2 text-black" value={dept} onChange={(e) => {setDept(e.target.value)}} required>
+            <select className="h-8 rounded-sm pl-2 text-black" value={dept} onChange={(e) => {setDept(e.target.value)}} required>
               <option value="">Select your department</option>
               <option value="CS">CS</option>
               <option value="ECE">ECE</option>
@@ -127,7 +131,7 @@ export default function Home() {
               <option value="CIVIL">CIVIL</option>
             </select>
             <label className="mt-2">About yourself</label>
-            <textarea className="rounded-sm pl-2 pt-1 text-black h-32" value={description} onChange={(e) => {setDescription(e.target.value)}} required></textarea>
+            <textarea placeholder="Say some interesting things about yourself, your hobbies, interests, etc." className="rounded-sm pl-2 pt-1 text-black h-32" value={description} onChange={(e) => {setDescription(e.target.value)}} required></textarea>
             {formLoading ? <div className="mx-auto mt-5 h-8 w-8 animate-spin border-primary border-4 border-t-transparent rounded-[100%]"></div> : <button className="hover:bg-transparent hover:text-primary border-primary border-2 mt-5 mx-auto px-5 py-2 rounded-md bg-primary text-black" type="submit">Submit</button>}
           </form>
           </div>
