@@ -12,3 +12,9 @@ export async function POST(req) {
         return NextResponse.json({msg: error}, {status: 500})
     }
 }
+
+export async function GET(req) {
+    await connectMongoDB()
+    const hostels = await Hostel.find()
+    return NextResponse.json({hostels: hostels})
+}

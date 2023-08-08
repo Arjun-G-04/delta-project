@@ -3,6 +3,8 @@
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import Loading from "./components/loading"
+import StudentHeader from "./components/StudentHeader"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
   const baseURL = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_BASE_URL : "http://localhost:3000"
@@ -17,7 +19,8 @@ export default function Home() {
   const [formLoading, setFormLoading] = useState(false)
   const redirectURI = encodeURIComponent(baseURL+"/callback")
   const loginURL = process.env.NODE_ENV === 'production' ? 'https://auth.delta.nitt.edu/authorize?client_id=aohOCpCGUUxlBn1C&redirect_uri='+redirectURI+'&response_type=code&grant_type=authorization_code&state=sdafsdghb&scope=email+openid+profile+user&nonce=bscsbascbadcsbasccabs' : 'https://auth.delta.nitt.edu/authorize?client_id=NAIRt7G6lbmLLFpN&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&response_type=code&grant_type=authorization_code&state=sdafsdghb&scope=email+openid+profile+user&nonce=bscsbascbadcsbasccabs'
-
+  const router = useRouter()
+  
   useEffect(() => {
     getInitialData()
   }, [])
@@ -43,7 +46,6 @@ export default function Home() {
     } else {
       setLoading(false)
     }
-    
   }
 
   function logout() {
@@ -95,14 +97,16 @@ export default function Home() {
   } else {
     if (auth) {
       if (created) {
-        return <div className="flex flex-col">
-          <p>Hey you are authenticated!</p>
-          <p>{userDetails.name}</p>
-          <p>{userDetails.rollno}</p>
-          <p>{userDetails.dept}</p>
-          <p>{userDetails.gender}</p>
-          <p>{userDetails.description}</p>
-          <button className="bg-primary" onClick={logout}>Logout</button>
+        return <div className="flex flex-col bg-background h-screen">
+          <StudentHeader logout={logout} name={userDetails.name} />
+          <div className="mx-4 flex flex-row gap-4">
+            <div onClick={() => {router.push("/profile")}} className="cursor-pointer justify-center items-center text-center flex flex-col p-2 hover:scale-[1.02] duration-500 ease-in-out w-1/2 h-[20vh] mt-5 bg-primary/20 border-primary border-[1px] rounded-md backdrop-blur-sm">
+                <h1 className="text-3xl font-ubuntu text-text">Your Profile</h1>
+            </div>
+            <div className="cursor-pointer justify-center items-center text-center flex flex-col p-2 hover:scale-[1.02] duration-500 ease-in-out w-1/2 h-[20vh] mt-5 bg-accent/20 border-accent border-[1px] rounded-md backdrop-blur-sm">
+                <h1 className="text-3xl font-ubuntu text-text">Available Students</h1>
+            </div>
+          </div>
         </div>
       } else {
         return <div className="bg-background flex flex-col h-screen">

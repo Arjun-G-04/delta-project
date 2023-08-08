@@ -57,13 +57,25 @@ export default function AddHostel() {
                 setFormLoading(false)
             })
     }
+
+    function logout() {
+        fetch(baseURL+"/api/auth/admin", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((res) => {
+                setAuth(false)
+            })
+    }
     
     if (loading) {
         return <Loading />
     } else {
         if (auth) {
             return <div className="bg-background h-screen">
-                <AdminHeader />
+                <AdminHeader logout={logout} />
                 <div className="mx-4 flex flex-col p-2 w-auto h-auto mt-5 bg-primary/20 border-primary border-[1px] rounded-md backdrop-blur-sm">
                     <h1 className="text-2xl font-ubuntu text-text">New Hostel</h1>
                     <form onSubmit={submit} className="mt-5 text-text flex flex-col font-poppins">
